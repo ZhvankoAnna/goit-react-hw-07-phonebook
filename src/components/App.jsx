@@ -11,10 +11,9 @@ const App = () => {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(getAllContacts());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <div className={css.container}>

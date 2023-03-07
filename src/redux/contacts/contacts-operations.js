@@ -15,9 +15,6 @@ export const getAllContacts = createAsyncThunk(
 );
 
 const isDublicate = (contacts, { name }) => {
-  console.log('data', contacts);
-  console.log('name', name);
-
   const normalizeName = name.toLowerCase();
   const dublicate = contacts.find(
     item => item.name.toLowerCase() === normalizeName
@@ -30,7 +27,6 @@ export const addContact = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const { data: result } = await api.addContact(data);
-      //   console.log('data', result)
       return result;
     } catch ({ response }) {
       return rejectWithValue(response);
@@ -51,10 +47,10 @@ export const deleteContact = createAsyncThunk(
   'contacts/delete',
   async (data, { rejectWithValue }) => {
     try {
-        await api.deleteContact(data);
-        return data;
-    } catch ({response}) {
-        return rejectWithValue(response);
+      await api.deleteContact(data);
+      return data;
+    } catch ({ response }) {
+      return rejectWithValue(response);
     }
   }
 );
