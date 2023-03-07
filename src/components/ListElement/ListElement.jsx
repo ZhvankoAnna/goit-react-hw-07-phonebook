@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
-import { removeContact } from 'redux/contacts-slice';
+import { deleteContact } from 'redux/contacts/contacts-operations';
 import { RxAvatar } from 'react-icons/rx';
 import css from 'components/ListElement/list-element.module.css';
 
@@ -22,14 +22,14 @@ const ListElement = () => {
   const filteredContacts = filterContacts();
 
   const onDeleteContact = id => {
-    dispatch(removeContact(id));
+    dispatch(deleteContact(id));
   };
 
-  const elements = filteredContacts.map(({ id, name, number }) => (
-    <li className={css.item}>
+  const elements = filteredContacts.map(({ id, name, phone }) => (
+    <li key={id} className={css.item}>
       <RxAvatar className={css.icon} />
       <p>
-        {name}: {number}
+        {name}: {phone}
       </p>
       <button
         className={css.btn}

@@ -1,14 +1,14 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contacts-slice';
+import { addContact } from 'redux/contacts/contacts-operations';
+// import { addContact } from 'redux/contacts/contacts-slice';
 import css from 'components/ContactForm/contact-form.module.css';
 
 const ContactForm = () => {
   const [inputValue, setInputValue] = useState({
     name: '',
-    number: '',
+    phone: '',
   });
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
@@ -21,15 +21,15 @@ const ContactForm = () => {
   const handleFormSubmit = e => {
     e.preventDefault();
     const data = { ...inputValue };
-    const newName = data.name;
-    const isDublicate = contacts.find(item => item.name === newName);
-    if (isDublicate) {
-      return Notify.failure(`${newName} is already in contacts`);
-    }
+    // const newName = data.name;
+    // const isDublicate = contacts.find(item => item.name === newName);
+    // if (isDublicate) {
+    //   return Notify.failure(`${newName} is already in contacts`);
+    // }
     dispatch(addContact(data));
     setInputValue({
       name: '',
-      number: '',
+      phone: '',
     });
   };
 
@@ -53,9 +53,9 @@ const ContactForm = () => {
         <input
           className={css.input}
           onChange={handleInputChange}
-          value={inputValue.number}
+          value={inputValue.phone}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
