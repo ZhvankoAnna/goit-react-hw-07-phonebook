@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getAllContacts } from 'redux/contacts/contacts-operations';
-// import { getContacts } from 'redux/selectors';
+import { getContacts } from 'redux/selectors';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import css from 'components/app.module.css';
 
 const App = () => {
-  // const contacts = useSelector(getContacts);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const App = () => {
       <ContactForm />
       <h2 className={css.title}>Contacts</h2>
       <Filter />
-      <ContactList />
+      {contacts.length !== 0 && <ContactList />}
     </div>
   );
 };
